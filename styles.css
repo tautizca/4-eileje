@@ -1,21 +1,44 @@
-.cell {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #ccc;
-    display: inline-block;
-}
-
-#board {
-    display: grid;
-    grid-template-columns: repeat(7, 50px);
-    grid-template-rows: repeat(6, 50px);
-    gap: 3px;
-}
-
-.player1 {
-    background-color: yellow;
-}
-
-.player2 {
-    background-color: red;
-}
+    /* Minimalistinė išvaizda */
+    body {
+      font-family: Arial, sans-serif;
+      background:#f5f5f5;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      margin:0;
+      padding:20px;
+    }
+    h1 {margin-bottom:10px;}
+    #board {
+      display:grid;
+      grid-template-columns:repeat(7,60px);
+      grid-auto-rows:60px;
+      gap:4px;
+      background:#004d99;
+      padding:4px;
+      border-radius:8px;
+      box-shadow:0 0 10px rgba(0,0,0,0.2);
+      user-select:none;                /* kad žaidėjai atsitiktinai nežymėtų teksto */
+    }
+    .cell {
+      width:60px;height:60px;
+      border-radius:50%;
+      background:#e0e0e0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:background 0.2s;
+    }
+    .cell.player1 {background:#ffd500;} /* geltonas diskas */
+    .cell.player2 {background:#c40003;} /* raudonas diskas  */
+    #status {margin-top:15px;font-weight:bold;}
+    #restart {
+      margin-top:10px;
+      padding:8px 14px;
+      border:none;
+      border-radius:6px;
+      background:#004d99;
+      color:#fff;
+      cursor:pointer;
+    }
