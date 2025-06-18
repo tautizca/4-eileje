@@ -1,0 +1,18 @@
+[
+    {
+        "url": "http://localhost:5501/",
+        "text":"Pradzia"
+    },
+        {
+        "url": "http://localhost:5501/portfolio",
+        "text":"Portfolio"
+    },
+    {
+        "url": "http://localhost:5501/uzduotys",
+        "text":"Uzduotys"
+    },
+    {
+        "url": "http://localhost:5501/kontaktai",
+        "text":"Kontaktai"
+    }
+]
