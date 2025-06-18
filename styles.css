@@ -1,7 +1,14 @@
 /* Futuristinis, modernus, tamsus dizainas su glassmorphism ir animacijomis */
+:root {
+  --glass-bg: rgba(255,255,255,0.18);
+  --glass-border: rgba(255,255,255,0.32);
+  --glass-highlight: rgba(255,255,255,0.45);
+  --glass-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+  --glass-blur: blur(16px);
+}
 body {
   font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #181c2b 0%, #232946 100%);
+  background: url('https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat fixed;
   min-height: 100vh;
   color: #e0e6f7;
   display: flex;
@@ -17,28 +24,49 @@ h1, h2 {
   text-shadow: 0 2px 12px #00ffe7a0;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
 #board {
   display: grid;
   grid-template-columns: repeat(7, 64px);
   grid-auto-rows: 64px;
   gap: 8px;
-  background: rgba(30, 34, 54, 0.7);
+  background: var(--glass-bg);
+  border-radius: 32px;
+  box-shadow: var(--glass-shadow);
+  border: 2.5px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  position: relative;
+  overflow: hidden;
   padding: 16px;
-  border-radius: 24px;
-  box-shadow: 0 8px 32px 0 #000a, 0 1.5px 8px #00ffe744;
-  backdrop-filter: blur(12px) saturate(1.2);
-  border: 1.5px solid rgba(0,255,255,0.12);
   user-select: none;
   transition: box-shadow 0.3s;
 }
 #board:hover {
   box-shadow: 0 12px 48px 0 #00ffe7a0, 0 2px 12px #000a;
 }
+#board::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 32px;
+  background: linear-gradient(120deg, var(--glass-highlight) 0%, transparent 100%);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 1;
+}
 
 .cell {
   width: 64px; height: 64px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.10);
   box-shadow: 0 2px 8px #00ffe733, 0 0.5px 2px #000a;
   display: flex;
   align-items: center;
@@ -46,7 +74,7 @@ h1, h2 {
   cursor: pointer;
   position: relative;
   transition: background 0.25s, box-shadow 0.25s, transform 0.18s;
-  border: 1.5px solid rgba(0,255,255,0.18);
+  border: 1.5px solid var(--glass-border);
   overflow: hidden;
 }
 .cell:active {
@@ -64,12 +92,12 @@ h1, h2 {
   pointer-events: none;
 }
 .cell.player1 {
-  background: radial-gradient(circle at 60% 40%, #ffe600 70%, #bfa800 100%);
+  background: radial-gradient(circle at 60% 40%, #ffe600 70%, #bfa800 100%, rgba(255,255,255,0.18) 120%);
   box-shadow: 0 0 24px #ffe60099, 0 2px 8px #000a;
   animation: dropIn 0.35s cubic-bezier(.5,1.7,.7,1) backwards;
 }
 .cell.player2 {
-  background: radial-gradient(circle at 60% 40%, #ff0055 70%, #7a0033 100%);
+  background: radial-gradient(circle at 60% 40%, #ff0055 70%, #7a0033 100%, rgba(255,255,255,0.18) 120%);
   box-shadow: 0 0 24px #ff005599, 0 2px 8px #000a;
   animation: dropIn 0.35s cubic-bezier(.5,1.7,.7,1) backwards;
 }
@@ -80,31 +108,22 @@ h1, h2 {
   100% { transform: translateY(0) scale(1) rotateX(0deg); opacity: 1; }
 }
 
-#status {
+#status, #new-game {
+  background: var(--glass-bg);
+  border-radius: 18px;
+  border: 1.5px solid var(--glass-border);
+  box-shadow: 0 2px 12px #00ffe744, 0 1.5px 8px #000a;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 12px 24px;
   margin-top: 18px;
+  color: #fff;
   font-weight: bold;
-  font-size: 1.2em;
-  color: #00ffe7;
   text-shadow: 0 2px 8px #00ffe7a0;
 }
-
-#new-game, #restart {
-  margin-top: 18px;
-  padding: 10px 22px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg,#00ffe7 0%,#232946 100%);
-  color: #181c2b;
-  font-weight: bold;
-  font-size: 1.1em;
-  cursor: pointer;
-  box-shadow: 0 2px 12px #00ffe744, 0 1.5px 8px #000a;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-#new-game:hover, #restart:hover {
-  background: linear-gradient(90deg,#232946 0%,#00ffe7 100%);
-  color: #00ffe7;
-  box-shadow: 0 4px 24px #00ffe7a0, 0 2px 12px #000a;
+#new-game:hover {
+  background: var(--glass-highlight);
+  color: #232946;
 }
 
 footer {
