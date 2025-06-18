@@ -1,44 +1,118 @@
-    /* Minimalistinė išvaizda */
-    body {
-      font-family: Arial, sans-serif;
-      background:#f5f5f5;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      margin:0;
-      padding:20px;
-    }
-    h1 {margin-bottom:10px;}
-    #board {
-      display:grid;
-      grid-template-columns:repeat(7,60px);
-      grid-auto-rows:60px;
-      gap:4px;
-      background:#004d99;
-      padding:4px;
-      border-radius:8px;
-      box-shadow:0 0 10px rgba(0,0,0,0.2);
-      user-select:none;                /* kad žaidėjai atsitiktinai nežymėtų teksto */
-    }
-    .cell {
-      width:60px;height:60px;
-      border-radius:50%;
-      background:#e0e0e0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      transition:background 0.2s;
-    }
-    .cell.player1 {background:#ffd500;} /* geltonas diskas */
-    .cell.player2 {background:#c40003;} /* raudonas diskas  */
-    #status {margin-top:15px;font-weight:bold;}
-    #restart {
-      margin-top:10px;
-      padding:8px 14px;
-      border:none;
-      border-radius:6px;
-      background:#004d99;
-      color:#fff;
-      cursor:pointer;
-    }
+/* Futuristinis, modernus, tamsus dizainas su glassmorphism ir animacijomis */
+body {
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #181c2b 0%, #232946 100%);
+  min-height: 100vh;
+  color: #e0e6f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 32px 0 0 0;
+}
+
+h1, h2 {
+  color: #e0e6f7;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 12px #00ffe7a0;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(7, 64px);
+  grid-auto-rows: 64px;
+  gap: 8px;
+  background: rgba(30, 34, 54, 0.7);
+  padding: 16px;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 #000a, 0 1.5px 8px #00ffe744;
+  backdrop-filter: blur(12px) saturate(1.2);
+  border: 1.5px solid rgba(0,255,255,0.12);
+  user-select: none;
+  transition: box-shadow 0.3s;
+}
+#board:hover {
+  box-shadow: 0 12px 48px 0 #00ffe7a0, 0 2px 12px #000a;
+}
+
+.cell {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 2px 8px #00ffe733, 0 0.5px 2px #000a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.25s, box-shadow 0.25s, transform 0.18s;
+  border: 1.5px solid rgba(0,255,255,0.18);
+  overflow: hidden;
+}
+.cell:active {
+  transform: scale(0.92) rotateX(12deg);
+  box-shadow: 0 0 24px #00ffe7cc, 0 1.5px 8px #000a;
+  background: rgba(0,255,255,0.08);
+}
+.cell::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,rgba(255,255,255,0.12),rgba(0,255,255,0.08));
+  z-index: 0;
+  pointer-events: none;
+}
+.cell.player1 {
+  background: radial-gradient(circle at 60% 40%, #ffe600 70%, #bfa800 100%);
+  box-shadow: 0 0 24px #ffe60099, 0 2px 8px #000a;
+  animation: dropIn 0.35s cubic-bezier(.5,1.7,.7,1) backwards;
+}
+.cell.player2 {
+  background: radial-gradient(circle at 60% 40%, #ff0055 70%, #7a0033 100%);
+  box-shadow: 0 0 24px #ff005599, 0 2px 8px #000a;
+  animation: dropIn 0.35s cubic-bezier(.5,1.7,.7,1) backwards;
+}
+
+@keyframes dropIn {
+  0% { transform: translateY(-80px) scale(0.7) rotateX(60deg); opacity: 0.2; }
+  80% { transform: translateY(8px) scale(1.08) rotateX(0deg); opacity: 1; }
+  100% { transform: translateY(0) scale(1) rotateX(0deg); opacity: 1; }
+}
+
+#status {
+  margin-top: 18px;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #00ffe7;
+  text-shadow: 0 2px 8px #00ffe7a0;
+}
+
+#new-game, #restart {
+  margin-top: 18px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#00ffe7 0%,#232946 100%);
+  color: #181c2b;
+  font-weight: bold;
+  font-size: 1.1em;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #00ffe744, 0 1.5px 8px #000a;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+#new-game:hover, #restart:hover {
+  background: linear-gradient(90deg,#232946 0%,#00ffe7 100%);
+  color: #00ffe7;
+  box-shadow: 0 4px 24px #00ffe7a0, 0 2px 12px #000a;
+}
+
+footer {
+  margin-top: 32px;
+  color: #6b7a99;
+  font-size: 0.95em;
+  text-shadow: 0 1px 4px #000a;
+}
+
+/* Google Fonts import for Orbitron */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
